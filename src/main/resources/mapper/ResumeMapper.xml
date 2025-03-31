@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.interviewAi.mapper.ResumeMapper">
+
+    <!-- 1. 자기소개서 생성 -->
+    <insert id="insertResume" useGeneratedKeys="true" keyProperty="resumeId">
+        INSERT INTO Resume (userId)
+        VALUES (#{userId})
+    </insert>
+
+    <!-- 2. 자기소개서 입력 -->
+    <insert id="insertResumeList" useGeneratedKeys="true" keyProperty="resumeListId">
+        INSERT INTO ResumeList (resumeId, resumeQuestion, resumeAnswer)
+        VALUES (#{resumeId}, #{resumeQuestion}, #{resumeAnswer})
+    </insert>
+
+</mapper>

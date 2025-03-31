@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.interviewAi.mapper.InterviewMapper">
+
+    <!-- 3. Interview 생성 -->
+    <insert id="insertInterview" useGeneratedKeys="true" keyProperty="interviewId">
+        INSERT INTO Interview (company, jobId, resumeId, userId, date)
+        VALUES (#{company}, #{jobId}, #{resumeId}, #{userId}, NOW())
+    </insert>
+
+</mapper>
