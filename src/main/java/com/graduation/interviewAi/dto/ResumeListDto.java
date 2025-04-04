@@ -5,4 +5,6 @@ import lombok.Data;
 public class ResumeListDto {
     private String resumeQuestion;
     private String resumeAnswer;
+    private Integer resumeListId;
+    private Integer resumeId;
 }
