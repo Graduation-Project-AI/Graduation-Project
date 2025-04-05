@@ -2,8 +2,10 @@ package com.graduation.interviewAi.domain;
 import java.sql.Timestamp;
 
 import lombok.Data;
+import lombok.Builder;
 
 @Data
+@Builder
 public class Result {
     private Integer resultId;
     private Integer logicScore;
