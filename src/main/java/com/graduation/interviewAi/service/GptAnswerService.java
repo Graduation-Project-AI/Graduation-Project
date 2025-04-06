@@ -18,29 +18,39 @@ public class GptAnswerService {
     private final GptApiService gptApiService;
     private final ResultMapper ResultMapper;
 
-    public Map<String, String> analyzeAnswers(List<AnswerWithQuestionDto> answers) {
+    public void analyzeAnswers(List<AnswerWithQuestionDto> answers) {
         StringBuilder promptBuilder = new StringBuilder("""
         아래는 면접 질문과 면접자의 답변입니다.
-        
-        전체 질문과 답변에 대해 다음을 간단히 평가해주세요:
-        
+    
+        전체 답변에 대해 다음 항목을 평가해주세요:
+    
         - 논리성 (10점 만점)
         - 명확성 (10점 만점)
         - 총점 (10점 만점)
-
-        마지막에는 전체 답변의 개선방안과 개선답변을 제시해주세요.
-        
-        형식:
-        [전체 질문]
+        - 전체 답변에 대한 분석 (자유롭게 기술)
+    
+        반드시 **모든 답변에 대해** 개선방안을 작성해주세요.
+        단 하나의 질문이라도 개선 포인트가 없어 보이더라도, **아주 사소한 부분이라도 찾아서** 개선할 수 있는 방안을 제시해주세요.
+        이후 각 질문에 대해 그 개선방안을 반영한 **개선된 답변**을 작성해주세요.
+    
+        반드시 아래 형식으로 출력해주세요:
+    
+        [전체 질문에 대한 평가]
         - 논리성: ?/10
         - 명확성: ?/10
         - 총점: ?/10
-        - 전체분석: ...
-        
-        [전체 개선]
-        - 개선방안: ...
-        - 개선답변: ...
+        - 전체분석: (여러 줄 가능)
+    
+        [각 답변에 대한 개선방안과 개선 답변]
+        - 개선방안:
+          답변 1.(개선 방안)
+          답변 2. (개선 방안)
+        - 개선답변:
+          답변 1. (개선된 답변)
+          답변 2. (개선된 답변)
+          ...
         """);
+
 
         for (int i = 0; i < answers.size(); i++) {
             AnswerWithQuestionDto dto = answers.get(i);
@@ -69,7 +79,10 @@ public class GptAnswerService {
                 .build();
 
         ResultMapper.saveResult(result);
-        return parsed;
+    }
+
+    public Result getResultByInterviewId(int interviewId) {
+        return ResultMapper.findResultByInterviewId(interviewId);
     }
 
 }

@@ -25,4 +25,19 @@
                )
     </insert>
 
+    <select id="findResultByInterviewId" resultType="com.graduation.interviewAi.domain.Result">
+        SELECT
+            resultId,
+            logicScore,
+            simScore,
+            claScore,
+            totalScore,
+            createdAt,
+            interviewId,
+            suggestion,
+            allEval,
+            impAnswer
+        FROM Result
+        WHERE interviewId = #{interviewId}
+    </select>
 </mapper>

@@ -77,13 +77,16 @@ public class GptApiService {
             Matcher totalMatcher = Pattern.compile("총점[:：]?\\s*(\\d+)/10").matcher(content);
             if (totalMatcher.find()) result.put("totalScore", totalMatcher.group(1));
 
-            Matcher evalMatcher = Pattern.compile("전체분석[:：]?\\s*(.*)").matcher(content);
+            // 전체분석 ~ 개선방안 전까지
+            Matcher evalMatcher = Pattern.compile("전체분석[:：]?\\s*([\\s\\S]*?)개선방안[:：]", Pattern.DOTALL).matcher(content);
             if (evalMatcher.find()) result.put("allEval", evalMatcher.group(1).trim());
 
-            Matcher suggestionMatcher = Pattern.compile("개선방안[:：]?\\s*(.*)").matcher(content);
+            // 개선방안 ~ 개선답변 전까지
+            Matcher suggestionMatcher = Pattern.compile("개선방안[:：]?\\s*([\\s\\S]*?)개선답변[:：]", Pattern.DOTALL).matcher(content);
             if (suggestionMatcher.find()) result.put("suggestion", suggestionMatcher.group(1).trim());
 
-            Matcher answerMatcher = Pattern.compile("개선답변[:：]?\\s*(.*)").matcher(content);
+            // 개선답변부터 끝까지
+            Matcher answerMatcher = Pattern.compile("개선답변[:：]?\\s*([\\s\\S]*)", Pattern.DOTALL).matcher(content);
             if (answerMatcher.find()) result.put("impAnswer", answerMatcher.group(1).trim());
 
         } catch (Exception e) {
