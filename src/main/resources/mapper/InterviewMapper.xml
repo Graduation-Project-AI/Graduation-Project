@@ -5,10 +5,28 @@
 
 <mapper namespace="com.graduation.interviewAi.mapper.InterviewMapper">
 
-    <!-- 3. Interview 생성 -->
+    <!-- 1. Interview 생성 -->
     <insert id="insertInterview" useGeneratedKeys="true" keyProperty="interviewId">
         INSERT INTO Interview (company, jobId, resumeId, userId, date)
         VALUES (#{company}, #{jobId}, #{resumeId}, #{userId}, NOW())
     </insert>
+    
+    <!-- 2. interviewId로 resumeId 조회 (gpt 질문 생성할때 필요)-->
+	<select id="getResumeIdByInterviewId" resultType="int">
+	    SELECT resumeId
+	    FROM Interview
+	    WHERE interviewid = #{interviewId}
+	</select>
+
+    <!-- 3. interviewId로 jobId 조회 (gpt 질문 저장할때 필요)-->
+	<select id="getJobIdByInterviewId" resultType="int">
+	    SELECT jobId FROM Interview WHERE interviewId = #{interviewId}
+	</select>
+	
+	
+	<!-- 3. interviewId로 Interview 조회 -->
+    <select id="findInterviewById" resultType="com.graduation.interviewAi.domain.Interview">
+        SELECT * FROM Interview WHERE interviewId = #{interviewId}
+    </select>
 
 </mapper>

@@ -5,6 +5,13 @@
 
 <mapper namespace="com.graduation.interviewAi.mapper.AnswerMapper">
 
+	<!-- 유저가 답할 질문을 answer 테이블에 넣어둠 -->
+    <insert id="insertEmptyAnswer">
+        INSERT INTO Answer (questionId, interviewid)
+        VALUES (#{questionId}, #{interviewId})
+    </insert>
+
+    <!-- 유저가 답한 질문-답변 쌍을 가져옴 -->
     <select id="findAnswersByInterviewId" resultType="com.graduation.interviewAi.dto.AnswerWithQuestionDto">
         SELECT
         a.answerId,

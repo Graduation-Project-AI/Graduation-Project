@@ -7,4 +7,6 @@ import com.graduation.interviewAi.domain.Interview;
 public interface InterviewMapper {
     void insertInterview(Interview interview);
     Interview findInterviewById(Integer interviewId);
+    Integer getResumeIdByInterviewId(Integer interviewId);
+    Integer getJobIdByInterviewId(Integer interviewId);
 }
