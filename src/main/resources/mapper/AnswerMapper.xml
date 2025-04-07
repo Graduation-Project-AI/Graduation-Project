@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.graduation.interviewAi.mapper.AnswerMapper">
 
@@ -10,5 +10,21 @@
         INSERT INTO Answer (questionId, interviewid)
         VALUES (#{questionId}, #{interviewId})
     </insert>
-</mapper>
 
+    <!-- 유저가 답한 질문-답변 쌍을 가져옴 -->
+    <select id="findAnswersByInterviewId" resultType="com.graduation.interviewAi.dto.AnswerWithQuestionDto">
+        SELECT
+        a.answerId,
+        a.acontent,
+        a.interviewId,
+        q.questionId,
+        q.jobId,
+        q.category,
+        q.qcontent,
+        q.interview_source_id
+        FROM Answer a
+        JOIN Question q ON a.questionId = q.questionId
+        WHERE a.interviewId = #{interviewId}
+    </select>
+
+</mapper>
