@@ -8,6 +8,5 @@ import java.util.Map;
 @Mapper
 public interface ResultMapper {
     void saveResult(Result result);
-
     Result findResultByInterviewId(int interviewId);
 }
