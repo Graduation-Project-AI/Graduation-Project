@@ -2,6 +2,7 @@ package com.graduation.interviewAi.service;
 
 import com.graduation.interviewAi.dto.QuestionDto;
 import com.graduation.interviewAi.mapper.QuestionMapper;
+import com.graduation.interviewAi.mapper.AnswerMapper;
 import com.graduation.interviewAi.mapper.InterviewMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class QuestionService {
 
     private final QuestionMapper questionMapper;
     private final InterviewMapper interviewMapper;
+    private final AnswerMapper answerMapper;
 
     public List<QuestionDto> getQuestions(int interviewId, int count) {
         if (count < 3) {
@@ -48,7 +50,11 @@ public class QuestionService {
         result.addAll(jobQuestions);
         result.addAll(resumeQuestions);
         result.addAll(end);
-
+        
+        //Answer table 에 질문 넣어두기
+        for (QuestionDto q : result) {
+            answerMapper.insertEmptyAnswer(q.getQuestionId(), interviewId);
+        }
         return result;
 
     }

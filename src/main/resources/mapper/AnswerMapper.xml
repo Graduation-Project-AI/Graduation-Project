@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.interviewAi.mapper.AnswerMapper">
+
+	<!-- 유저가 답할 질문을 answer 테이블에 넣어둠 -->
+    <insert id="insertEmptyAnswer">
+        INSERT INTO Answer (questionId, interviewid)
+        VALUES (#{questionId}, #{interviewId})
+    </insert>
+</mapper>
+
