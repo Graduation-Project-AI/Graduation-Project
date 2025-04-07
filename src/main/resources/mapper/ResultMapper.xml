@@ -14,7 +14,8 @@
             interviewId,
             suggestion,
             allEval,
-            impAnswer
+            impAnswer,
+            simScore
         )
         VALUES (
                    #{logicScore},
@@ -23,7 +24,8 @@
                    #{interviewId},
                    #{suggestion},
                    #{allEval},
-                   #{impAnswer}
+                   #{impAnswer},
+                   #{simScore}
                )
     </insert>
 

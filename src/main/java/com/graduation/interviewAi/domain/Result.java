@@ -9,7 +9,7 @@ import lombok.Builder;
 public class Result {
     private Integer resultId;
     private Integer logicScore;
-    private Integer simScore;
+    private float simScore;
     private Integer claScore;
     private Integer totalScore;
     private Timestamp createdAt;

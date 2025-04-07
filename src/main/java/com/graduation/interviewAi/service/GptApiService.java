@@ -82,7 +82,7 @@ public class GptApiService {
             if (evalMatcher.find()) result.put("allEval", evalMatcher.group(1).trim());
 
             // 개선방안 ~ 개선답변 전까지
-            Matcher suggestionMatcher = Pattern.compile("개선방안[:：]?\\s*([\\s\\S]*?)개선답변[:：]", Pattern.DOTALL).matcher(content);
+            Matcher suggestionMatcher = Pattern.compile("- 개선방안[:：]?\\s*([\\s\\S]*?)개선답변[:：]", Pattern.DOTALL).matcher(content);
             if (suggestionMatcher.find()) result.put("suggestion", suggestionMatcher.group(1).trim());
 
             // 개선답변부터 끝까지
@@ -94,6 +94,51 @@ public class GptApiService {
         }
 
         return result;
+    }
+
+    private List<Double> getEmbeddingVector(String text) {
+        String url = "https://api.openai.com/v1/embeddings";
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("model", "text-embedding-ada-002");
+        body.put("input", text);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(body, headers);
+
+        try {
+            ResponseEntity<Map> response = restTemplate.postForEntity(url, request, Map.class);
+            List<Map<String, Object>> data = (List<Map<String, Object>>) response.getBody().get("data");
+            return (List<Double>) data.get(0).get("embedding");
+        } catch (Exception e) {
+            log.error("임베딩 벡터 요청 실패: {}", e.getMessage());
+            return null;
+        }
+    }
+
+    public double calculateEmbeddingSimilarity(String text1, String text2) {
+        List<Double> vector1 = getEmbeddingVector(text1);
+        List<Double> vector2 = getEmbeddingVector(text2);
+
+        if (vector1 == null || vector2 == null || vector1.size() != vector2.size()) {
+            return 0.0;
+        }
+
+        double dot = 0.0;
+        double normA = 0.0;
+        double normB = 0.0;
+        for (int i = 0; i < vector1.size(); i++) {
+            double a = vector1.get(i);
+            double b = vector2.get(i);
+            dot += a * b;
+            normA += a * a;
+            normB += b * b;
+        }
+
+        return normA == 0 || normB == 0 ? 0.0 : dot / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
 }
