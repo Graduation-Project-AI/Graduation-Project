@@ -11,6 +11,19 @@
         VALUES (#{questionId}, #{interviewId})
     </insert>
 
+    <select id="findByInterviewIdAndQuestionId" resultType="com.graduation.interviewAi.domain.Answer">
+        SELECT * FROM Answer
+        WHERE interviewid = #{interviewId}
+        AND questionId = #{questionId}
+    </select>
+
+    <update id="updateAcontentByInterviewAndQuestion">
+        UPDATE Answer
+        SET acontent = #{acontent}
+        WHERE interviewid = #{interviewId}
+        AND questionId = #{questionId}
+    </update>
+
     <!-- 유저가 답한 질문-답변 쌍을 가져옴 -->
     <select id="findAnswersByInterviewId" resultType="com.graduation.interviewAi.dto.AnswerWithQuestionDto">
         SELECT
