@@ -5,6 +5,7 @@
 
 <mapper namespace="com.graduation.interviewAi.mapper.AnswerMapper">
 
+    <!-- InterviewId 기반 QnA 내역 가져옴 -->
     <select id="findAnswersByInterviewId" resultType="com.graduation.interviewAi.dto.AnswerWithQuestionDto">
         SELECT
         a.answerId,
@@ -20,6 +21,7 @@
         WHERE a.interviewId = #{interviewId}
     </select>
 
+    <!-- 동일한 QuestionId의 타 면접자 답변을 가져옴 -->
     <select id="findAnswersByQuestionId" resultType="string">
         SELECT acontent FROM answer WHERE question_id = #{questionId}
     </select>

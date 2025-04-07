@@ -4,6 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.graduation.interviewAi.mapper.ResultMapper">
+
+    <!-- 답변 분석 결과 저장 -->
     <insert id="saveResult" useGeneratedKeys="true" keyProperty="resultId">
         INSERT INTO Result (
             logicScore,
@@ -25,6 +27,7 @@
                )
     </insert>
 
+    <!-- InterviewId 기반 결과 가져옴 -->
     <select id="findResultByInterviewId" resultType="com.graduation.interviewAi.domain.Result">
         SELECT
             resultId,
