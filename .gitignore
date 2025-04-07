@@ -36,5 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 
+### GCP credentials ###
+src/main/resources/gcp/*.json
 
 application.properties

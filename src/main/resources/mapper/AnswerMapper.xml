@@ -10,5 +10,19 @@
         INSERT INTO Answer (questionId, interviewid)
         VALUES (#{questionId}, #{interviewId})
     </insert>
+
+    <select id="findByInterviewIdAndQuestionId" resultType="com.graduation.interviewAi.domain.Answer">
+        SELECT * FROM Answer
+        WHERE interviewid = #{interviewId}
+        AND questionId = #{questionId}
+    </select>
+
+    <update id="updateAcontentByInterviewAndQuestion">
+        UPDATE Answer
+        SET acontent = #{acontent}
+        WHERE interviewid = #{interviewId}
+        AND questionId = #{questionId}
+    </update>
+
 </mapper>
 
