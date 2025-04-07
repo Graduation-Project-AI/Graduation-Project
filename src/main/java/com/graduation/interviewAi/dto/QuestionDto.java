@@ -8,4 +8,5 @@ public class QuestionDto {
     private Integer category;
     private String qcontent;
     private Integer interviewSourceId;
+    private Integer questionId;
 }

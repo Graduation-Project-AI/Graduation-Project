@@ -5,10 +5,24 @@
 
 <mapper namespace="com.graduation.interviewAi.mapper.QuestionMapper">
 
+    <!-- 자소서 기반 질문 삽입 -->
 	<insert id="insertResumeQuestion">
 	  INSERT INTO Question (jobId, category, qcontent, interview_source_id)
 	  VALUES (#{jobId}, #{category}, #{qcontent}, #{interviewSourceId})
 	</insert>
 
-
+    <!-- 카테고리별로 질문 랜덤하게 조회 -->
+    <select id="getQuestionsByCategory" resultType="com.graduation.interviewAi.dto.QuestionDto">
+        SELECT * FROM Question
+        WHERE category = #{category}
+        <if test="jobId != null">
+            AND jobId = #{jobId}
+        </if>
+        <if test="interviewSourceId != null">
+            AND interview_source_id = #{interviewSourceId}
+        </if>
+        ORDER BY RAND()
+        LIMIT #{count}
+    </select>
+    
 </mapper>
