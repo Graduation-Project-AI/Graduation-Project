@@ -16,5 +16,12 @@
         INSERT INTO ResumeList (resumeId, resumeQuestion, resumeAnswer)
         VALUES (#{resumeId}, #{resumeQuestion}, #{resumeAnswer})
     </insert>
+    
+    <!-- 3. resumeId로 ResumeList 조회 -->
+	<select id="getResumeListByResumeId" resultType="com.graduation.interviewAi.dto.ResumeListDto">
+	    SELECT resumeListId, resumeId, resumeQuestion, resumeAnswer
+	    FROM ResumeList
+	    WHERE resumeId = #{resumeId}
+	</select>
 
 </mapper>
