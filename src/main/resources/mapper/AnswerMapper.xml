@@ -20,4 +20,8 @@
         WHERE a.interviewId = #{interviewId}
     </select>
 
+    <select id="findAnswersByQuestionId" resultType="string">
+        SELECT acontent FROM answer WHERE question_id = #{questionId}
+    </select>
+
 </mapper>

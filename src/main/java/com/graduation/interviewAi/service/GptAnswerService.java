@@ -79,6 +79,11 @@ public class GptAnswerService {
                 .build();
 
         ResultMapper.saveResult(result);
+
+        // AnswerWithQuestionDto의 질문-답변 개수 만큼 반복
+        // question id기반의 모든 답변을 가져옴
+        // 유사성을 계산(이 유사성은 답변간인데...)
+
     }
 
     public Result getResultByInterviewId(int interviewId) {

@@ -10,4 +10,6 @@ import java.util.List;
 public interface AnswerMapper {
     void saveAnswer(Answer answer);
     List<AnswerWithQuestionDto> findAnswersByInterviewId(int interviewId);
+    List<String> findAnswersByQuestionId(int questionId);
+
 }
