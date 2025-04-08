@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
+import org.springframework.http.HttpStatus;
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,10 +35,16 @@ public class KakaoAuthController {
         KakaoUserDto user = kakaoAuthService.registerOrLoginWithCode(code);
         String token = jwtTokenService.generateToken(user);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("token", token);
-        response.put("user", user);
+        String redirectUrl = UriComponentsBuilder
+                .fromUriString("http://localhost:3000/kakao/redirect")
+                .queryParam("token", token)
+                .queryParam("userId", user.getUserId())
+                .queryParam("name", user.getName())
+                .build()
+                .toUriString();
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(URI.create(redirectUrl))
+                .build();
     }
 }
