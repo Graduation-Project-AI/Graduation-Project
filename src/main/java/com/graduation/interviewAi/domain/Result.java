@@ -11,10 +11,9 @@ public class Result {
     private Integer logicScore;
     private float simScore;
     private Integer claScore;
-    private Integer totalScore;
     private Timestamp createdAt;
     private Integer interviewId;
     private String suggestion;
-    private String allEval;
     private String impAnswer;
+    private Integer questionId;
 }

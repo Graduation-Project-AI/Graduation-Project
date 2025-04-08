@@ -19,16 +19,13 @@ public class GptAnswerController {
     private final GptAnswerService gptAnswerService;
 
     @PostMapping("/analyze/{interviewId}")
-    public Result analyzeAnswers(@PathVariable int interviewId) {
-        // 1. interviewId로 답변+질문 리스트 조회
+    public List<Result> analyzeAnswers(@PathVariable int interviewId) {
         List<AnswerWithQuestionDto> answers = answerService.getAnswersByInterviewId(interviewId);
-
-        // 2. GPT 분석 호출하고 DB에 저장
         return gptAnswerService.analyzeAnswers(answers);
     }
 
     @GetMapping("/analyze/{interviewId}")
-    public Result getResultByInterviewId(@PathVariable int interviewId) {
+    public List<Result> getResultByInterviewId(@PathVariable int interviewId) {
         return gptAnswerService.getResultByInterviewId(interviewId);
     }
 }

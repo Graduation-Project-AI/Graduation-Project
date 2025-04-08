@@ -3,10 +3,10 @@ package com.graduation.interviewAi.mapper;
 import com.graduation.interviewAi.domain.Result;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Map;
+import java.util.List;
 
 @Mapper
 public interface ResultMapper {
     void saveResult(Result result);
-    Result findResultByInterviewId(int interviewId);
+    List<Result> findResultByInterviewId(int interviewId);
 }
