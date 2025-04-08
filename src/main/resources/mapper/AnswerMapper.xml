@@ -24,7 +24,7 @@
         AND questionId = #{questionId}
     </update>
 
-    <!-- 유저가 답한 질문-답변 쌍을 가져옴 -->
+    <!-- InterviewId 기반 QnA 내역 가져옴 -->
     <select id="findAnswersByInterviewId" resultType="com.graduation.interviewAi.dto.AnswerWithQuestionDto">
         SELECT
         a.answerId,
@@ -38,6 +38,14 @@
         FROM Answer a
         JOIN Question q ON a.questionId = q.questionId
         WHERE a.interviewId = #{interviewId}
+    </select>
+
+    <!-- 동일한 QuestionId의 타 면접자 답변을 가져옴 -->
+    <select id="findAnswersByQuestionId" resultType="string">
+        SELECT acontent
+        FROM Answer
+        WHERE questionId = #{questionId}
+          AND interviewId != #{interviewId}
     </select>
 
 </mapper>

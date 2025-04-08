@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.interviewAi.mapper.ResultMapper">
+
+    <!-- 답변 분석 결과 저장 -->
+    <insert id="saveResult" useGeneratedKeys="true" keyProperty="resultId">
+        INSERT INTO Result (
+            logicScore,
+            claScore,
+            totalScore,
+            interviewId,
+            suggestion,
+            allEval,
+            impAnswer,
+            simScore
+        )
+        VALUES (
+                   #{logicScore},
+                   #{claScore},
+                   #{totalScore},
+                   #{interviewId},
+                   #{suggestion},
+                   #{allEval},
+                   #{impAnswer},
+                   #{simScore}
+               )
+    </insert>
+
+    <!-- InterviewId 기반 결과 가져옴 -->
+    <select id="findResultByInterviewId" resultType="com.graduation.interviewAi.domain.Result">
+        SELECT
+            resultId,
+            logicScore,
+            simScore,
+            claScore,
+            totalScore,
+            createdAt,
+            interviewId,
+            suggestion,
+            allEval,
+            impAnswer
+        FROM Result
+        WHERE interviewId = #{interviewId}
+    </select>
+</mapper>
