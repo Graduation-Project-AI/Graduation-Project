@@ -10,22 +10,20 @@
         INSERT INTO Result (
             logicScore,
             claScore,
-            totalScore,
             interviewId,
             suggestion,
-            allEval,
             impAnswer,
-            simScore
+            simScore,
+            questionId
         )
         VALUES (
                    #{logicScore},
                    #{claScore},
-                   #{totalScore},
                    #{interviewId},
                    #{suggestion},
-                   #{allEval},
                    #{impAnswer},
-                   #{simScore}
+                   #{simScore},
+                   #{questionId}
                )
     </insert>
 
@@ -36,12 +34,11 @@
             logicScore,
             simScore,
             claScore,
-            totalScore,
             createdAt,
             interviewId,
             suggestion,
-            allEval,
-            impAnswer
+            impAnswer,
+            questionId
         FROM Result
         WHERE interviewId = #{interviewId}
     </select>
