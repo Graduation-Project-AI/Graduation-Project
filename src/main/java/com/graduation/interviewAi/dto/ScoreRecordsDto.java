@@ -1,6 +1,6 @@
 package com.graduation.interviewAi.dto;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
@@ -9,5 +9,5 @@ public class ScoreRecordsDto {
     private Double simScore;
     private Double logicScore;
     private Double claScore;
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
 }

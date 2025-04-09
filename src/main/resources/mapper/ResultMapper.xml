@@ -27,7 +27,7 @@
                )
     </insert>
 
-    <!-- InterviewId 기반 결과 가져옴 -->
+    <!-- InterviewId 기반 결과 조회 -->
     <select id="findResultByInterviewId" resultType="com.graduation.interviewAi.domain.Result">
         SELECT
             resultId,
@@ -43,7 +43,7 @@
         WHERE interviewId = #{interviewId}
     </select>
 
-    <!-- userID 기반 점수 내역 가져옴-->
+    <!-- userID 기반 점수 내역 조회-->
     <select id="findScoreRecordsByInterviewId" resultType="com.graduation.interviewAi.dto.ScoreRecordsDto">
         SELECT
             r.interviewId,

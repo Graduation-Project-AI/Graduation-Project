@@ -24,7 +24,7 @@
         AND questionId = #{questionId}
     </update>
 
-    <!-- InterviewId 기반 QnA 내역 가져옴 -->
+    <!-- InterviewId 기반 QnA 내역 조회 -->
     <select id="findAnswersByInterviewId" resultType="com.graduation.interviewAi.dto.AnswerWithQuestionDto">
         SELECT
         a.answerId,

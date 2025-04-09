@@ -1,5 +1,6 @@
 package com.graduation.interviewAi.controller;
 
+import com.graduation.interviewAi.dto.InterviewWithAnswersDto;
 import com.graduation.interviewAi.dto.ScoreRecordsDto;
 import com.graduation.interviewAi.service.ResultService;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,10 @@ public class ResultController {
     @GetMapping("/{userId}")
     public List<ScoreRecordsDto> getResultsByUser(@PathVariable Integer userId) {
         return resultService.getScoreRecordsByUserId(userId);
+    }
+
+    @GetMapping("/{userId}/with-answers")
+    public List<InterviewWithAnswersDto> getInterviewsWithAnswers(@PathVariable Integer userId) {
+        return resultService.getAllRecordByUserId(userId);
     }
 }
