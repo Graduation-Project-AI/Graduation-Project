@@ -38,11 +38,13 @@ public class QuestionService {
         int half = remaining / 2;
         int rest = remaining - half;
 
-        // 3. 직군 질문 (category 2)
-        List<QuestionDto> jobQuestions = questionMapper.getQuestionsByCategory(2, half, jobId, null);
-
-        // 4. 자소서 기반 질문 (category 3)
+        // 3. 자소서 기반 질문으로 rest채우기 (category 3)
         List<QuestionDto> resumeQuestions = questionMapper.getQuestionsByCategory(3, rest, jobId, interviewId);
+        int actualResumeCount = resumeQuestions.size();
+        int missingFromResume = rest - actualResumeCount;
+        
+        // 4. 자소서 입력 안하면 직군 질문으로 count 채우기
+        List<QuestionDto> jobQuestions = questionMapper.getQuestionsByCategory(2, half + missingFromResume, jobId, null);
 
         // 전부 합치기
         List<QuestionDto> result = new ArrayList<>();
