@@ -1,5 +1,6 @@
 package com.graduation.interviewAi.controller;
 
+import com.google.api.client.util.Value;
 import com.graduation.interviewAi.dto.KakaoUserDto;
 import com.graduation.interviewAi.service.KakaoAuthService;
 import com.graduation.interviewAi.service.JwtTokenService;
@@ -11,13 +12,20 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import org.springframework.http.HttpStatus;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequiredArgsConstructor
 public class KakaoAuthController {
+	
+//	@Value("${frontend.redirect-uri}")
+//	private String frontendRedirectUri;
+	private final String frontendRedirectUri = "http://localhost:3000/kakao/redirect";
+
 
     private final KakaoAuthService kakaoAuthService;
     private final JwtTokenService jwtTokenService;
@@ -31,20 +39,22 @@ public class KakaoAuthController {
 
     // 2. 카카오 콜백 → 서버가 모든 로직 처리 후 JWT 반환
     @GetMapping("/kakao/callback")
-    public ResponseEntity<Map<String, Object>> kakaoCallback(@RequestParam("code") String code) {
+    public void kakaoCallback(@RequestParam("code") String code, HttpServletResponse response) throws IOException {
         KakaoUserDto user = kakaoAuthService.registerOrLoginWithCode(code);
         String token = jwtTokenService.generateToken(user);
 
+        // 프론트로 쿼리스트링에 담아서 리디렉션
         String redirectUrl = UriComponentsBuilder
-                .fromUriString("http://localhost:3000/kakao/redirect")
+                .fromUriString(frontendRedirectUri)
                 .queryParam("token", token)
                 .queryParam("userId", user.getUserId())
-                .queryParam("name", user.getName())
+                .queryParam("name", URLEncoder.encode(user.getName(), "UTF-8"))
                 .build()
                 .toUriString();
 
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .location(URI.create(redirectUrl))
-                .build();
+        response.sendRedirect(redirectUrl);
     }
+
+
+
 }
