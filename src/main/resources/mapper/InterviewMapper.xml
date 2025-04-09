@@ -29,18 +29,20 @@
         SELECT * FROM Interview WHERE interviewId = #{interviewId}
     </select>
 
-    <!-- userID 기반 인터뷰 내역 조회 -->
-    <select id="findInterviewsByUserId" resultType="com.graduation.interviewAi.domain.Interview">
+    <!-- userID 기반 인터뷰 내역 조회(직무포함) -->
+    <select id="findInterviewsByUserId" resultType="com.graduation.interviewAi.dto.InterviewWithJobDto">
         SELECT
-            interviewId,
-            company,
-            jobId,
-            resumeId,
-            date AS createdAt,
-            userId
-        FROM Interview
-        WHERE userId = #{userId}
-        ORDER BY date DESC
+            i.interviewId,
+            i.company,
+            i.jobId,
+            f.job,
+            i.resumeId,
+            i.date AS createdAt,
+            i.userId
+        FROM Interview i
+                 JOIN Field f ON i.jobId = f.jobId
+        WHERE i.userId = #{userId}
+        ORDER BY i.date DESC
     </select>
 
 

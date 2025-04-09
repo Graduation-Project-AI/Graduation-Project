@@ -1,5 +1,6 @@
 package com.graduation.interviewAi.mapper;
 
+import com.graduation.interviewAi.dto.InterviewWithJobDto;
 import org.apache.ibatis.annotations.Mapper;
 import com.graduation.interviewAi.domain.Interview;
 
@@ -11,5 +12,5 @@ public interface InterviewMapper {
     Interview findInterviewById(Integer interviewId);
     Integer getResumeIdByInterviewId(Integer interviewId);
     Integer getJobIdByInterviewId(Integer interviewId);
-    List<Interview> findInterviewsByUserId(Integer interviewId);
+    List<InterviewWithJobDto> findInterviewsByUserId(Integer interviewId);
 }
