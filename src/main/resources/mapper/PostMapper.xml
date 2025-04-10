@@ -26,5 +26,13 @@
 	    SELECT * FROM Comment WHERE postId = #{postId} ORDER BY createdAt ASC
 	</select>
 
+	<!-- 게시글 수정 -->
+	<update id="updatePost">
+	    UPDATE Post
+	    SET postName = #{postName},
+	        pContent = #{pContent},
+	        userRole = #{userRole}
+	    WHERE postId = #{postId}
+	</update>
 
 </mapper>
