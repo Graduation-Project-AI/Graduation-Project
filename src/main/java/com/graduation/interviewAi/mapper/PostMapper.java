@@ -15,5 +15,5 @@ public interface PostMapper {
     Post getPostById(int postId);
     List<Comment> getCommentsByPostId(int postId);
     void updatePost(PostRequestDto dto);
-
+    void deletePost(int postId);
 }
