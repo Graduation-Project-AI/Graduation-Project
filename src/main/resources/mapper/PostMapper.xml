@@ -9,5 +9,11 @@
     <select id="selectAllPosts" resultType="com.graduation.interviewAi.domain.Post">
         SELECT * FROM Post ORDER BY createdAt DESC
     </select>
-
+    
+    <!-- 게시글 등록 -->
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="postId">
+        INSERT INTO Post (postName, pContent, userId, userRole, createdAt)
+        VALUES (#{postName}, #{pContent}, #{userId}, #{userRole}, NOW())
+    </insert>
+    
 </mapper>
