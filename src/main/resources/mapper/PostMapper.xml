@@ -35,4 +35,9 @@
 	    WHERE postId = #{postId}
 	</update>
 
+	<!-- 게시글 삭제 -->
+	<delete id="deletePost">
+    DELETE FROM Post WHERE postId = #{postId}
+	</delete>
+
 </mapper>

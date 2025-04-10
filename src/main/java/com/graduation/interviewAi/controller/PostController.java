@@ -44,6 +44,14 @@ public class PostController {
         return ResponseEntity.ok("게시글이 수정되었습니다.");
     }
 
+    // 게시글 삭제
+    @PostMapping("/{postId}")
+    public ResponseEntity<String> deletePost(@PathVariable("postId") int postId) {
+        postService.deletePost(postId);
+        return ResponseEntity.ok("게시글이 삭제되었습니다.");
+    }
+
+
 
 
 }

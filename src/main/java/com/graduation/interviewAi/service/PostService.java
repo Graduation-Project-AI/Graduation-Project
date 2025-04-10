@@ -43,5 +43,10 @@ public class PostService {
         postMapper.updatePost(dto);
     }
 
+    //게시글 삭제
+    public void deletePost(int postId) {
+        postMapper.deletePost(postId);
+    }
+
 
 }
