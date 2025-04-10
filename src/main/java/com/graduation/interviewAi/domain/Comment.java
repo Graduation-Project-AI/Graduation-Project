@@ -5,8 +5,9 @@ import lombok.Data;
 @Data
 public class Comment {
     private Integer commentId;
-    private String commentName;
+    private int postId;
     private String cContent;
     private Timestamp createdAt;
     private Integer userId;
+    private Integer userRole;
 }

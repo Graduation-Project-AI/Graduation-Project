@@ -24,7 +24,6 @@ public class GptAnswerService {
 
     public List<Result> analyzeAnswers(List<AnswerWithQuestionDto> answers) {
 
-        // 프롬프트 템플릿은 밖에 선언
         String promptTemplate = """
         아래는 면접 질문과 면접자의 답변입니다.
     

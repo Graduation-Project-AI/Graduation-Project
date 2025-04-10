@@ -2,8 +2,9 @@ package com.graduation.interviewAi.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import com.graduation.interviewAi.domain.Comment;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface CommentMapper {
-    void createComment(Comment comment);
+    void insertComment(Comment comment);
 }
