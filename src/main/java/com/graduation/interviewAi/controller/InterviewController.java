@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.graduation.interviewAi.dto.InterviewStartRequest;
 import com.graduation.interviewAi.service.InterviewService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/interview")
 @RequiredArgsConstructor
+@Tag(name="InterviewController", description="interview 시작 API")
 public class InterviewController {
 
     private final InterviewService interviewService;

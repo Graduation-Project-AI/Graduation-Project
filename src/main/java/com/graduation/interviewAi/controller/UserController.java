@@ -11,11 +11,13 @@ import com.graduation.interviewAi.dto.KakaoLoginRequest;
 import com.graduation.interviewAi.dto.KakaoUserDto;
 import com.graduation.interviewAi.service.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
+@Tag(name="UserController", description="유저 API")
 public class UserController {
 
     private final UserService userService;

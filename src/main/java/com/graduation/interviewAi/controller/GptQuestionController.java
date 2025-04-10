@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.graduation.interviewAi.service.GptQuestionService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/gpt")
 @RequiredArgsConstructor
+@Tag(name="GptQuestionController", description="자기소개서 기반 질문 생성 API")
 public class GptQuestionController {
 
     private final GptQuestionService gptQuestionService;

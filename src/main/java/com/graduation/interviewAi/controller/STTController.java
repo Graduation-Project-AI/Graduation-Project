@@ -1,6 +1,9 @@
 package com.graduation.interviewAi.controller;
 
 import com.graduation.interviewAi.service.STTService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import com.graduation.interviewAi.mapper.AnswerMapper;
 import com.graduation.interviewAi.domain.Answer;
 
@@ -15,6 +18,7 @@ import java.io.File;
 @RestController
 @RequestMapping("/api/stt")
 @RequiredArgsConstructor
+@Tag(name="STTController", description="stt 변환 API")
 public class STTController {
 
     private final STTService sttService;

@@ -2,6 +2,9 @@ package com.graduation.interviewAi.controller;
 
 import com.graduation.interviewAi.dto.KakaoUserDto;
 import com.graduation.interviewAi.service.KakaoAuthService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import com.graduation.interviewAi.service.JwtTokenService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@Tag(name="KakaoAuthController", description="카카오 로그인 관련 API")
 public class KakaoAuthController {
 
     private final KakaoAuthService kakaoAuthService;

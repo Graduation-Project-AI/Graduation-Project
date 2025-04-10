@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.graduation.interviewAi.dto.QuestionDto;
 import com.graduation.interviewAi.service.QuestionService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/question")
 @RequiredArgsConstructor
+@Tag(name="QuestionController", description="질문 추출하는 API")
 public class QuestionController {
 
  private final QuestionService questionService;
