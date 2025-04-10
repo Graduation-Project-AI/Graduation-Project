@@ -27,7 +27,7 @@
                )
     </insert>
 
-    <!-- InterviewId 기반 결과 가져옴 -->
+    <!-- InterviewId 기반 결과 조회 -->
     <select id="findResultByInterviewId" resultType="com.graduation.interviewAi.domain.Result">
         SELECT
             resultId,
@@ -42,4 +42,20 @@
         FROM Result
         WHERE interviewId = #{interviewId}
     </select>
+
+    <!-- userID 기반 점수 내역 조회-->
+    <select id="findScoreRecordsByInterviewId" resultType="com.graduation.interviewAi.dto.ScoreRecordsDto">
+        SELECT
+            r.interviewId,
+            AVG(r.simScore) AS simScore,
+            AVG(r.logicScore) AS logicScore,
+            AVG(r.claScore) AS claScore,
+            MAX(r.createdAt) AS createdAt
+        FROM Result r
+                 JOIN Interview i ON r.interviewId = i.interviewId
+        WHERE i.userId = #{userId}
+        GROUP BY r.interviewId
+        ORDER BY MAX(r.createdAt) DESC
+    </select>
+
 </mapper>
