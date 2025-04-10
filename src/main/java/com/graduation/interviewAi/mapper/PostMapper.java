@@ -9,4 +9,5 @@ import java.util.List;
 @Mapper
 public interface PostMapper {
     List<Post> selectAllPosts();
+    void insertPost(Post post);
 }

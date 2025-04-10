@@ -19,5 +19,12 @@ public class PostService {
         return postMapper.selectAllPosts();
     }
 
-
+    public void createPost(PostRequestDto dto) {
+        Post post = new Post();
+        post.setPostName(dto.getPostName());
+        post.setPContent(dto.getPContent());
+        post.setUserId(dto.getUserId());
+        post.setUserRole(dto.getUserRole());
+        postMapper.insertPost(post);
+    }
 }

@@ -21,5 +21,12 @@ public class PostController {
     public ResponseEntity<List<Post>> getPosts() {
         return ResponseEntity.ok(postService.getAllPosts());
     }
+    
+    // 게시글 작성
+    @PostMapping
+    public ResponseEntity<String> createPost(@RequestBody PostRequestDto postDto) {
+        postService.createPost(postDto);
+        return ResponseEntity.ok("게시글 작성 완료");
+    }
 
 }
