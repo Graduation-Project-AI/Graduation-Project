@@ -16,4 +16,15 @@
         VALUES (#{postName}, #{pContent}, #{userId}, #{userRole}, NOW())
     </insert>
     
+    <!-- 게시글 상세 조회 -->
+	<select id="getPostById" resultType="com.graduation.interviewAi.domain.Post">
+	    SELECT * FROM Post WHERE postId = #{postId}
+	</select>
+	
+	<!-- postId로 댓글 목록 조회 -->
+	<select id="getCommentsByPostId" resultType="com.graduation.interviewAi.domain.Comment">
+	    SELECT * FROM Comment WHERE postId = #{postId} ORDER BY createdAt ASC
+	</select>
+
+
 </mapper>
