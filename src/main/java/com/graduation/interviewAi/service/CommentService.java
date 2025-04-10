@@ -29,4 +29,8 @@ public class CommentService {
         commentMapper.insertComment(comment);
     }
 
+    public void deleteCommentById(int commentId) {
+        commentMapper.deleteCommentById(commentId);
+    }
+
 }

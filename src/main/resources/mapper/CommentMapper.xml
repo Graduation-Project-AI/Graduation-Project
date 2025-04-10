@@ -21,4 +21,8 @@
                  )
     </insert>
 
+    <delete id="deleteCommentById" parameterType="int">
+        DELETE FROM Comment WHERE commentId = #{commentId}
+    </delete>
+
 </mapper>
