@@ -10,4 +10,7 @@ import java.util.List;
 public interface PostMapper {
     List<Post> selectAllPosts();
     void insertPost(Post post);
+    Post getPostById(int postId);
+    List<Comment> getCommentsByPostId(int postId);
+
 }

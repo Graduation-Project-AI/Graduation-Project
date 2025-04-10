@@ -28,5 +28,13 @@ public class PostController {
         postService.createPost(postDto);
         return ResponseEntity.ok("게시글 작성 완료");
     }
+    
+    // 게시글 상세 조회 + 댓글 목록
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostDetailDto> getPostDetail(@PathVariable("postId") int postId) {
+        return ResponseEntity.ok(postService.getPostDetail(postId));
+    }
+
+
 
 }
