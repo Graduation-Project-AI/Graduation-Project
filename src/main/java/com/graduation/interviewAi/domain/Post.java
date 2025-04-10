@@ -9,4 +9,5 @@ public class Post {
     private String pContent;
     private Timestamp createdAt;
     private Integer userId;
+    private Integer userRole;
 }
