@@ -21,5 +21,12 @@ public class CommentController {
         return ResponseEntity.ok("댓글이 등록되었습니다.");
     }
 
+    // 댓글 삭제
+    @PostMapping("/api/comments/{commentId}")
+    public ResponseEntity<String> deleteComment(@PathVariable Integer commentId) {
+        commentService.deleteCommentById(commentId);
+        return ResponseEntity.ok("댓글이 삭제되었습니다.");
+    }
+
 
 }

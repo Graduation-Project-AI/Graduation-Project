@@ -29,4 +29,9 @@ public class CommentService {
         commentMapper.insertComment(comment);
     }
 
+    public boolean deleteCommentById(int commentId) {
+        int deletedCount = commentMapper.deleteCommentById(commentId);
+        return deletedCount > 0;
+    }
+
 }
