@@ -20,7 +20,7 @@ public class CommentController {
     // 댓글 작성
     @PostMapping("/api/posts/{postId}/comments")
     @Operation(summary = "댓글 작성")
-    public ResponseEntity<String> addComment(@PathVariable Integer postId, @RequestBody Comment comment) {
+    public ResponseEntity<String> addComment(@PathVariable("postId") Integer postId, @RequestBody Comment comment) {
         comment.setPostId(postId); // URL에서 postId 받아와서 설정
         commentService.saveComment(comment);
         return ResponseEntity.ok("댓글이 등록되었습니다.");
@@ -29,7 +29,7 @@ public class CommentController {
     // 댓글 삭제
     @PostMapping("/api/comments/{commentId}")
     @Operation(summary = "댓글 삭제")
-    public ResponseEntity<String> deleteComment(@PathVariable Integer commentId) {
+    public ResponseEntity<String> deleteComment(@PathVariable("commentId") Integer commentId) {
         commentService.deleteCommentById(commentId);
         return ResponseEntity.ok("댓글이 삭제되었습니다.");
     }
